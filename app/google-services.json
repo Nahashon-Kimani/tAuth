@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "467318893239",
+    "firebase_url": "https://tauth-3972d.firebaseio.com",
+    "project_id": "tauth-3972d",
+    "storage_bucket": "tauth-3972d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:467318893239:android:cbca5ec30b99dc7d",
+        "android_client_info": {
+          "package_name": "com.e.tauth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "467318893239-pekaoc89gs54qt0ttli5m5vh0bmb3mo5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.e.tauth",
+            "certificate_hash": "29b7edd8798e5a0759e3e5d41a2f1dc24dcf4a50"
+          }
+        },
+        {
+          "client_id": "467318893239-5r8r5da6k2vvtjm7rjfemp37ss2cq4g9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeHSgZQ7uM-7d9r9KovfX4dXMmoidGR-g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "467318893239-5r8r5da6k2vvtjm7rjfemp37ss2cq4g9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/event"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:weightSum="1">
+
+
+    <Spinner
+        android:id="@+id/class_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@color/textColor" />
+
+    <EditText
+        android:id="@+id/number_of_tickets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/textColor"
+        android:hint="@string/number_of_tickets"
+        android:inputType="numberDecimal|number"
+        android:padding="16dp"
+        android:textColor="@color/secondaryTextColor"
+        android:textColorHint="@color/secondaryTextColor"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/total_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="@color/textColor"
+        android:padding="10dp"
+        android:text="@string/total_amount"
+        android:textColor="@color/secondaryTextColor"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/reset_registration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_weight=".5"
+            android:background="@color/colorAccent"
+            android:text="@string/view"
+            android:textColor="@color/textColor"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/submit_registration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:background="@color/colorPrimary"
+            android:text="@string/submit"
+            android:textColor="@color/textColor"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>

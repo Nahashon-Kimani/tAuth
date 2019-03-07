@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Auth</string>
+    <string name="email">Email Address</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="register">Register</string>
+    <string name="login">Already Have an account\? Login Here</string>
+    <string name="name">Name</string>
+    <string name="number">Phone Number</string>
+    <string name="login2">Login</string>
+    <string name="nothing">"KSH. 0.00"</string>
+    <string name="event_date">Event Date</string>
+    <string name="event">Event</string>
+    <string name="register_event">Register Event</string>
+    <string name="number_of_tickets">Number of Tickets</string>
+    <string name="total_amount">Total\: KSH. 7000</string>
+    <string name="view">View</string>
+    <string name="submit">Submit</string>
+
+    <string name="event_desc">When a new user signs up using your app\'s sign-up form, complete any new account validation steps that your app requires, such as verifying that the new account\'s password was correctly typed and meets your complexity requirements. \n 8:00pm to Dawn. \n All Are Welcome\!</string>
+    <string name="confirm">Confirm Attendance</string>
+    <string name="business_class">Please confirm whether the details are correct\n Class: VIP Class \n Number of Tickets:1 \n and\n Payable Amount is Ksh. 7,000</string>
+    <string name="no_of_tickets">No of Tickets</string>
+
+    <string-array name="event_class">
+        <item>Select Class</item>
+        <item>VIP Class</item>
+        <item>Business Class</item>
+    </string-array>
+</resources>
