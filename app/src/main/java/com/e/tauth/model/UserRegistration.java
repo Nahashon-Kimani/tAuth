@@ -1,12 +1,12 @@
 package com.e.tauth.model;
 
-public class User {
+public class UserRegistration {
     private String username, email, phoneNo;
 
-    public User() {
+    public UserRegistration() {
     }
 
-    public User(String username, String email, String phoneNo) {
+    public UserRegistration(String username, String email, String phoneNo) {
         this.username = username;
         this.email = email;
         this.phoneNo = phoneNo;

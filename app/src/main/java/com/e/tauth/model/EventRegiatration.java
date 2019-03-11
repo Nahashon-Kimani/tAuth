@@ -1,13 +1,13 @@
 package com.e.tauth.model;
 
-public class UserRegiatration {
+public class EventRegiatration {
     private String userClass, user, regDate;
     private int noOfTickets, payableAmount;
 
-    public UserRegiatration() {
+    public EventRegiatration() {
     }
 
-    public UserRegiatration(String userClass, String user, String regDate, int noOfTickets, int payableAmount) {
+    public EventRegiatration(String userClass, String user, String regDate, int noOfTickets, int payableAmount) {
         this.userClass = userClass;
         this.user = user;
         this.regDate = regDate;

@@ -2,7 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="4dp"
     android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:src="@drawable/m_pesa"
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -19,6 +26,7 @@
         android:id="@+id/user_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="100dp"
         android:hint="@string/business_class"
         android:layout_marginTop="20dp"
         android:gravity="center"

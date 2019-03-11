@@ -1,9 +1,9 @@
 package com.e.tauth.activity;
 
 import android.app.Dialog;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.e.tauth.R;
-import com.e.tauth.model.UserRegiatration;
+import com.e.tauth.model.EventRegiatration;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.FirebaseDatabase;
@@ -98,6 +98,10 @@ public class BookEvent extends AppCompatActivity {
                 Toast.makeText(BookEvent.this, userClass, Toast.LENGTH_SHORT).show();
 
 
+                if (userClass.equals("Select Class")){
+                    userClass = "Business Class";
+                }
+
                  noOfTicket = noOfTickets.getText().toString().trim();
                 if (noOfTicket.isEmpty()) {
                     noOfTicket = "1";
@@ -120,9 +124,9 @@ public class BookEvent extends AppCompatActivity {
                 String regDate = DateFormat.getDateTimeInstance().format(new Date());
                 Toast.makeText(BookEvent.this, regDate, Toast.LENGTH_SHORT).show();
 
-                UserRegiatration userRegiatration = new UserRegiatration(userClass, "John", "date", tickets, payableAmount);
+                EventRegiatration eventRegiatration = new EventRegiatration(userClass, "John", regDate, tickets, payableAmount);
                 FirebaseDatabase.getInstance().getReference("Confirmed Users").push()
-                        .setValue(userRegiatration).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        .setValue(eventRegiatration).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
@@ -141,8 +145,12 @@ public class BookEvent extends AppCompatActivity {
             public void onClick(View v) {
 
                 String userClass = classSpinner.getSelectedItem().toString().trim();
+
                 Toast.makeText(BookEvent.this, userClass, Toast.LENGTH_SHORT).show();
 
+                if (userClass.equals("Select Class")){
+                    userClass = "Business Class";
+                }
 
                 noOfTicket = noOfTickets.getText().toString().trim();
                 if (noOfTicket.isEmpty()) {

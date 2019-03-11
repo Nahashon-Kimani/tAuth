@@ -13,7 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.e.tauth.activity.EventActivity;
-import com.e.tauth.model.User;
+import com.e.tauth.activity.LoginActivity;
+import com.e.tauth.model.UserRegistration;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -57,6 +58,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.register_btn:
                 registerUser();
                 break;
+            case R.id.register_tvt:
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                break;
         }
     }
 
@@ -65,9 +69,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
 
+        //We need to get the current user ID so that using it we can get name of the user to the next Activities;
         if (mAuth.getCurrentUser() != null) {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+
             Intent intent = new Intent(MainActivity.this, EventActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.putExtra("currentUser", user.getEmail());
             startActivity(intent);
             finish();
         }
@@ -108,17 +117,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if (task.isSuccessful()) {
-                    //We will authenticate the user and store additional field at the real-time database.
-                    User user = new User(name, email, phone);
+                    //We will authenticate the userRegistration and store additional field at the real-time database.
+                    UserRegistration userRegistration = new UserRegistration(name, email, phone);
                     FirebaseDatabase.getInstance().getReference().child("Users")
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                            .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            .setValue(userRegistration).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             progressBar.setVisibility(View.GONE);
-                            Toast.makeText(MainActivity.this, FirebaseAuth.getInstance().getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
+                            //
                             if (task.isSuccessful()) {
-                                Toast.makeText(MainActivity.this, "User registered Successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "UserRegistration registered Successfully", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
