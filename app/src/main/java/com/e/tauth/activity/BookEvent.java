@@ -36,6 +36,7 @@ public class BookEvent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_dialog);
 
+		//Initializing the objects
         classSpinner = findViewById(R.id.class_spinner);
         noOfTickets = findViewById(R.id.number_of_tickets);
         resetRegistration = findViewById(R.id.reset_registration);
@@ -47,7 +48,8 @@ public class BookEvent extends AppCompatActivity {
         resetRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*noOfTickets.setText("0");
+			/*This code is used to reset the texview containing numbe of tickets text back to zero
+                noOfTickets.setText("0");
                 totalAmount.setText(getResources().getString(R.string.nothing));*/
                 resetRegistration();//working correctly.
             }
@@ -57,6 +59,7 @@ public class BookEvent extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 submitRegistration();
+                submitRegistration.setEnabled(false);
             }
         });
     }
@@ -70,9 +73,10 @@ public class BookEvent extends AppCompatActivity {
         classSpinner.setAdapter(classAdapter);
     }
 
+
     public void resetRegistration() {
         noOfTickets.setText("0");
-        totalAmount.setText(getResources().getString(R.string.nothing));
+        //totalAmount.setText(getResources().getString(R.string.nothing));
     }
 
     public void submitRegistration() {
@@ -97,7 +101,7 @@ public class BookEvent extends AppCompatActivity {
                 String userClass = classSpinner.getSelectedItem().toString().trim();
                 Toast.makeText(BookEvent.this, userClass, Toast.LENGTH_SHORT).show();
 
-
+//Text Validation: Confirm whether class is selected and numbet of Tickesa is not equal to zero.
                 if (userClass.equals("Select Class")){
                     userClass = "Business Class";
                 }
@@ -106,25 +110,22 @@ public class BookEvent extends AppCompatActivity {
                 if (noOfTicket.isEmpty()) {
                     noOfTicket = "1";
                     tickets = Integer.parseInt(noOfTicket);
-                    Toast.makeText(BookEvent.this, Integer.toString(tickets), Toast.LENGTH_SHORT).show();
                 }else {
                     tickets = Integer.parseInt(noOfTicket);
-                    Toast.makeText(BookEvent.this, Integer.toString(tickets), Toast.LENGTH_SHORT).show();
                 }
 
                 if (userClass.equals("Business Class")||userClass.equals("Select Class")){
                     payableAmount = tickets*2000;
-                    Toast.makeText(BookEvent.this, Integer.toString(payableAmount), Toast.LENGTH_SHORT).show();
                 }else{
                     payableAmount = tickets*4500;
-                    Toast.makeText(BookEvent.this, Integer.toString(payableAmount), Toast.LENGTH_SHORT).show();
                 }
 
                 //String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
                 String regDate = DateFormat.getDateTimeInstance().format(new Date());
-                Toast.makeText(BookEvent.this, regDate, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(BookEvent.this, regDate, Toast.LENGTH_SHORT).show();
 
-                EventRegiatration eventRegiatration = new EventRegiatration(userClass, "John", regDate, tickets, payableAmount);
+                //Inserting the new applicant to the database.
+				EventRegiatration eventRegiatration = new EventRegiatration(userClass, "John", regDate, tickets, payableAmount);
                 FirebaseDatabase.getInstance().getReference("Confirmed Users").push()
                         .setValue(eventRegiatration).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

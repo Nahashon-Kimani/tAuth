@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        userNameEdt = findViewById(R.id.user_name);
+        //intializing the EditText and Buttons
+		userNameEdt = findViewById(R.id.user_name);
         emailEdt = findViewById(R.id.email_edt);
         passwordEdt = findViewById(R.id.pass_edt);
         phoneNoEdt = findViewById(R.id.phone_no);
@@ -45,13 +46,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         registerTvt = findViewById(R.id.register_tvt);
         progressBar = findViewById(R.id.progress_bar);
 
-        mAuth = FirebaseAuth.getInstance();
+        //Getting Firebase instance
+		mAuth = FirebaseAuth.getInstance();
 
-        signInBtn.setOnClickListener(this);
+        //Setting OnCLickListener to button and Textview to Login activity
+		signInBtn.setOnClickListener(this);
         registerTvt.setOnClickListener(this);
 
     }
-
+//Simpler method to set OnClick Listener to buttons once View.OnClickListener is implemented
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -64,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
+//Checking whether the user is login. If Login, the system redirect user to EventActivity
     @Override
     protected void onStart() {
         super.onStart();
@@ -72,8 +75,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //We need to get the current user ID so that using it we can get name of the user to the next Activities;
         if (mAuth.getCurrentUser() != null) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-
             Intent intent = new Intent(MainActivity.this, EventActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.putExtra("currentUser", user.getEmail());
@@ -83,13 +84,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void registerUser() {
+		//Getting the name, email, password and phone  number of users from the edittext
         final String name = userNameEdt.getText().toString().trim();
         final String email = emailEdt.getText().toString().trim();
         String password = passwordEdt.getText().toString().trim();
         final String phone = phoneNoEdt.getText().toString().trim();
 
 
-        if (name.isEmpty()) {
+        //Validating the credential inputed by the user
+		if (name.isEmpty()) {
             userNameEdt.setError("Name should not be empty");
             userNameEdt.requestFocus();
         }
@@ -111,13 +114,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             emailEdt.requestFocus();
         }
 
-        progressBar.setVisibility(View.VISIBLE);
+        //Registering the user using email and password and then sending other details to Firebase Real time datatbase
+		progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if (task.isSuccessful()) {
                     //We will authenticate the userRegistration and store additional field at the real-time database.
+					//if user is succefully registered, then his/her details are sent to the database
                     UserRegistration userRegistration = new UserRegistration(name, email, phone);
                     FirebaseDatabase.getInstance().getReference().child("Users")
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

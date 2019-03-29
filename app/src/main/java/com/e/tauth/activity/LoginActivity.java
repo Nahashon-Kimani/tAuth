@@ -55,23 +55,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        if (mAuth.getCurrentUser() !=null){
-            Intent intent = new Intent(LoginActivity.this, EventActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
-        }
-    }
+    
 
     private void signUpUser() {
+		//Getting the user email and password from Textview
         String email = emailLogin.getText().toString().trim();
         String password = passwordLogin.getText().toString().trim();
 
-        if (email.isEmpty()) {
+        //Validating the details input by the user
+		if (email.isEmpty()) {
             emailLogin.setError("Email Address should not be empty");
             emailLogin.requestFocus();
         }
@@ -84,7 +76,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             emailLogin.setError("Please enter a valid email");
             emailLogin.requestFocus();
         }
-
+//Validating and login the user
         loginProgressBar.setVisibility(View.VISIBLE);
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override

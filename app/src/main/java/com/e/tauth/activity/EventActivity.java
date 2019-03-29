@@ -1,10 +1,13 @@
 package com.e.tauth.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -61,6 +64,19 @@ public class EventActivity extends AppCompatActivity {
         });
 
     }
+	
+	//This method checks whether the user is logged. If logged in, then stay on same activity else, go back to Login/create new activity register.
+	@Override
+    protected void onStart() {
+        super.onStart();
+
+        if (mAuth.getCurrentUser() == null){
+            Intent intent = new Intent(EventActivity.this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }
+    }
 
 
     //creating a new Event
@@ -84,5 +100,28 @@ public class EventActivity extends AppCompatActivity {
                 Toast.makeText(EventActivity.this, databaseError.getMessage().toString(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.log_out:
+                FirebaseAuth.getInstance().signOut();
+                break;
+
+            case R.id.settings:
+                Toast.makeText(EventActivity.this, "Settings Activity", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
     }
 }
